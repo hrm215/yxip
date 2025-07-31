@@ -19,8 +19,11 @@ if os.path.exists('ip.txt'):
 with open('ip.txt', 'w') as file:
     for url in urls:
         # 发送HTTP请求获取网页内容
-        response = requests.get(url)
-        
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            print(f"[错误] 无法请求 {url}：{e}")
+            continue
         # 使用BeautifulSoup解析HTML
         soup = BeautifulSoup(response.text, 'html.parser')
         
