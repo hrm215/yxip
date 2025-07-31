@@ -20,7 +20,6 @@ with open('ip.txt', 'w') as file:
     for url in urls:
         # 发送HTTP请求获取网页内容
         response = requests.get(url, timeout=10)
-            response.raise_for_status()
         # 使用BeautifulSoup解析HTML
         soup = BeautifulSoup(response.text, 'html.parser')
         
